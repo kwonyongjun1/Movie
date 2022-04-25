@@ -1,28 +1,41 @@
 import logo from './logo.svg';
 import './App.css';
-import {useState} from "react";
+import axios from 'axios';
+import {useEffect, useState} from "react";
 
 function App() {
-    const [toDo, setToDo] = useState('');
-    const [toDos, setToDos] = useState([]);
-    const onChange = (event) => setToDo(event.target.value);
-    const onSubmit = (event) => {
-        event.preventDefault();
-        if(toDo === ""){
-            return;
-        }
-        setToDo("");
-        setToDos((currentArray) => [...currentArray,toDo]);
-
-    }
-    console.log(toDos);
+    const [loading, setLoading] = useState(true);
+    const [movies, setMovies] = useState([]);
+    useEffect(() =>{
+        axios.get('https://yts.mx/api/v2/list_movies.json?minimum_rating=9')
+            .then((Response)=>{
+              setMovies(Response.data.data.movies);
+              setLoading(false);
+            }).catch((Error)=>{
+                console.log(Error);
+        });
+    },[]);
+    console.log(movies);
   return (
-    <div className="App">
-        <h1>Hi {toDos.length}</h1>
-        <form onSubmit={onSubmit}>
-            <input onChange={onChange} value = {toDo} type = "text" placeholder = "Write your "/>
-            <button> Add</button>
-        </form>
+    <div>
+        {
+            loading ?
+                (<h1>Loading...</h1>
+                ):(
+                    <div> {movies.map(movie =>
+                        <div key = {movie.id}>
+                            <img src = {movie.medium_cover_image} />
+                            <h2>{movie.title}</h2>
+                            <p>{movie.summary}</p>
+                            <ul>
+                            {movie.genres.map((g) => (
+                                  <li key={g}>{g}</li>
+                             ))}
+                            </ul>
+                        </div>
+                    )}
+                    </div>
+                )}
     </div>
   );
 }
