@@ -1,7 +1,11 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import Movie from "../components/Movie";
-
+/*
+* Parameters
+* Conclusions
+* styles
+* */
 function Home(){
     const [loading, setLoading] = useState(true);
     const [movies, setMovies] = useState([]);
