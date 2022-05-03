@@ -30,6 +30,7 @@ function Detail(){
                         <h1>Loading....</h1>
                     ):(
                         <div>
+                            <h1>DetailPage</h1>
                             <h1>{movie.id}</h1>
                             <h1>{movie.title}</h1>
                             <h1>{movie.date_uploaded}</h1>

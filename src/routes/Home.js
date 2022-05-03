@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import Movie from "../components/Movie";
-
+import '../css/common/common.css';
 function Home(){
     const [loading, setLoading] = useState(true);
     const [movies, setMovies] = useState([]);
@@ -16,7 +16,7 @@ function Home(){
     },[]);
     console.log(movies);
     return (
-        <div>
+        <div className='basic-div'>
             {
                 loading ?
                     (<h1>Loading...</h1>
