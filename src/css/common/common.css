@@ -1,3 +1,8 @@
 .basic-div{
     padding: 42px 30px;
 }
+
+.grid-group {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+}
