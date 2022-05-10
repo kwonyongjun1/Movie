@@ -2,14 +2,20 @@ import PropTypes from "prop-types"
 import {Link} from "react-router-dom";
 import {Card, Button, CardGroup} from 'react-bootstrap';
 import {useState} from "react";
+import '../css/common/common.css';
 function Movie(props){
 
-    const [CardGroup, CardGroupState] = useState(true);
+    const [mouse, setmouse] = useState(false);
+
 
     return (
 
+        <div>
+        <Card style={{ width: '18rem' }}
+              className={`mouse ${mouse ? 'in' : 'out'}`}
+              onMouseEnter={ ()=> {setmouse(true)}}
+              onMouseLeave={ ()=> {setmouse(false)}}>
 
-        <Card style={{ width: '18rem' }}>
             <Card.Img variant="top" src = {props.coverImg} alt = {props.title} />
             <Card.Body>
                 <Card.Title>
@@ -26,8 +32,7 @@ function Movie(props){
             </Card.Body>
         </Card>
 
-
-
+        </div>
 
     )
 }

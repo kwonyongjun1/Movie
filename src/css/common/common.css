@@ -6,3 +6,15 @@
     display: grid;
     grid-template-columns: repeat(3,minmax(0,1fr));
 }
+
+.mouse.in {
+    width : 20rem!important;
+    -webkit-transition:width 0.2s, height 0.2s, background-color 2s, -webkit-transform 0.2s;
+    transition:width 0.2s, height 0.2s, background-color 2s, transform 0.2s;
+}
+
+.mouse.out {
+    width : 18rem!important;
+    -webkit-transition:width 0.2s, height 0.2s, background-color 2s, -webkit-transform 0.2s;
+    transition:width 0.2s, height 0.2s, background-color 2s, transform 0.2s;
+}
