@@ -11,27 +11,26 @@ function Movie(props){
     return (
 
         <div>
-        <Card style={{ width: '18rem' }}
-              className={`mouse ${mouse ? 'in' : 'out'}`}
-              onMouseEnter={ ()=> {setmouse(true)}}
-              onMouseLeave={ ()=> {setmouse(false)}}>
+                    <Card style={{ width: '18rem' }}
+                      className={`mouse ${mouse ? 'in' : 'out'}`}
+                      onMouseEnter={ ()=> {setmouse(true)}}
+                      onMouseLeave={ ()=> {setmouse(false)}}>
 
-            <Card.Img variant="top" src = {props.coverImg} alt = {props.title} />
-            <Card.Body>
-                <Card.Title>
-                    {props.title}
-                    {props.index}
-                </Card.Title>
-                <Card.Text>
-                    {props.summary}
-                    {props.genres.map((g) => (
-                        <li key={g}>{g}</li>
-                    ))}
-                </Card.Text>
-                <Link to={`/movie/${props.id}`}><Button variant="primary">gd </Button></Link>
-            </Card.Body>
-        </Card>
+                    <Card.Img variant="top" src = {props.coverImg} alt = {props.title} />
+                    <Card.Body>
+                        <Card.Title>
+                            {props.title}
+                            {props.index}
+                        </Card.Title>
+                        <Card.Text>
+                            {props.summary}
+                            {props.genres.map((g) => (
+                                <li key={g}>{g}</li>
+                            ))}
+                        </Card.Text>
 
+                    </Card.Body>
+                </Card>
         </div>
 
     )
