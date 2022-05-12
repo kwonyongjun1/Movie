@@ -15,7 +15,8 @@ function Home(){
         setShowModal(false);
     }
 
-
+    //모달창 상세내용 나오게하기
+    //모달창 컴포넌트화
     useEffect(() =>{
         axios.get('https://yts.mx/api/v2/list_movies.json?minimum_rating=9')
             .then((Response)=>{
