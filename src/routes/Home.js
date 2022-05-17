@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import Movie from "../components/Movie";
+import Modal from "../components/Modal";
 import '../css/common/common.css';
 import {Card, Button, CardGroup} from 'react-bootstrap';
 
@@ -8,8 +9,11 @@ function Home(){
     const [loading, setLoading] = useState(true);
     const [movies, setMovies] = useState([]);
     const [showModal, setShowModal] = useState(false);
-    const openModal = () =>{
+    let movieId = '';
+    const openModal = id =>{
+        movieId = id;
         setShowModal(true);
+
     }
     const closeModal = () =>{
         setShowModal(false);
@@ -26,7 +30,7 @@ function Home(){
             console.log(Error);
         });
     },[]);
-    console.log(movies);
+
     return (
         <div className='basic-div'>
             {
@@ -34,7 +38,9 @@ function Home(){
                     (<h1>Loading...</h1>
                     ):(
                             <div className= "grid-group"> {movies.map((movie,index) => (
-                                <div onClick={openModal}>
+                                <div onClick={ () => {
+                                    openModal(movie.id);
+                                }} >
                                     <Movie
                                         index = {index}
                                         id = {movie.id}
@@ -52,27 +58,8 @@ function Home(){
             {
                 showModal ?
                     (
-                        <div className='background'>
-                            <div className='modal__container'>
-                                    <Card
-                                        bg={'light'}
-                                        key={'Light'}
-                                        text={'black'}
-                                        style={{ width: '18rem' }}
-                                        className="mb-2"
-                                    >
-                                        <Card.Header>Header <button onClick={closeModal}>Click</button></Card.Header>
-                                        <Card.Body>
-                                            <Card.Title> Card Title
-                                            </Card.Title>
-                                            <Card.Text>
-                                                Some quick example text to build on the card title and make up the
-                                                bulk of the card's content.
-                                            </Card.Text>
-                                        </Card.Body>
-                                    </Card>
-                            </div>
-                        </div>
+                        <Modal showModal = {showModal} setShowModal = {setShowModal} movieId = {movieId}> </Modal>
+
                     ) : null
 
             }

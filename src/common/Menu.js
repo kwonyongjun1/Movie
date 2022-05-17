@@ -9,7 +9,7 @@ function Menu(){
                 <Navbar.Brand href="/">🎬</Navbar.Brand>
                 <Nav className="me-auto">
                     <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link >Features</Nav.Link>
+                    <Nav.Link >Search</Nav.Link>
                     <Nav.Link >Pricing</Nav.Link>
                 </Nav>
             </Container>
