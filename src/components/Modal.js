@@ -4,16 +4,17 @@ import axios from "axios";
 
 function Modal(props){
     const [movieDetail, setmovieDetail] = useState('');
-
-  /*  useEffect(() =>{
+    const [useLoading, setLoading] = useState(true);
+     useEffect(() =>{
         axios.get('https://yts.mx/api/v2/movie_details.json?movie_id='+props.movieId)
             .then((Response)=>{
-                setmovieDetail(Response.data.data.movies);
+                setmovieDetail(Response.data.data.movie);
+                setLoading(false);
                 console.log(movieDetail);
             }).catch((Error)=>{
             console.log(Error);
         });
-    },[]);*/
+    },[]);
 
     const closeModal = () =>{
         props.setShowModal(false);
@@ -22,25 +23,50 @@ function Modal(props){
 
     return(
         <div className='background'>
-            <div className='modal__container'>
-                <Card
-                    bg={'light'}
-                    key={'Light'}
-                    text={'black'}
-                    style={{ width: '18rem' }}
-                    className="mb-2"
-                >
-                    <Card.Header>Header <button onClick={closeModal}>Click</button></Card.Header>
-                    <Card.Body>
-                        <Card.Title> Card Title
-                        </Card.Title>
-                        <Card.Text>
-                            Some quick example text to build on the card title and make up the
-                            bulk of the card's content.
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
-            </div>
+            {
+                useLoading  ?
+                    (
+                       <div> Loading.. </div>
+                    )   :
+                    (
+                        <div className='modal__container'>
+                            <Card
+                                bg={'light'}
+                                key={'Light'}
+                                text={'black'}
+                                style={{ width: '18rem' }}
+                                className="mb-2"
+                            >
+                                <Card.Header>Header <button onClick={closeModal}>Click</button></Card.Header>
+                                <Card.Body>
+                                    <Card.Title> {movieDetail.title}
+                                    </Card.Title>
+                                    <Card.Text>
+
+                                        러닝타임 :
+                                        {
+                                            movieDetail.runtime
+                                        }
+
+                                        좋아요 :
+                                        {
+                                            movieDetail.like_count
+                                        }
+
+                                        장르 :
+                                        {
+                                            // movieDetail.genres.map((g,index) => (
+                                            //     <li key = {g}> {g}</li>
+                                            // ))
+                                        }
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </div>
+                    )
+            }
+
+
         </div>
 
 

@@ -9,9 +9,9 @@ function Home(){
     const [loading, setLoading] = useState(true);
     const [movies, setMovies] = useState([]);
     const [showModal, setShowModal] = useState(false);
-    let movieId = '';
+    const [movieId, setMovieId] = useState(0);
     const openModal = id =>{
-        movieId = id;
+        setMovieId(id);
         setShowModal(true);
 
     }
@@ -38,7 +38,7 @@ function Home(){
                     (<h1>Loading...</h1>
                     ):(
                             <div className= "grid-group"> {movies.map((movie,index) => (
-                                <div onClick={ () => {
+                                <div key = {index} onClick={ () => {
                                     openModal(movie.id);
                                 }} >
                                     <Movie
