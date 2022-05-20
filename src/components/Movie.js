@@ -23,10 +23,10 @@ function Movie(props){
                             {props.index}
                         </Card.Title>
                         <Card.Text>
-                            {props.summary}
                             {props.genres.map((g) => (
                                 <li key={g}>{g}</li>
                             ))}
+                            {props.summary}
                         </Card.Text>
 
                     </Card.Body>
