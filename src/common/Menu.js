@@ -1,7 +1,13 @@
 import {useEffect, useState} from "react";
-import { Navbar, Container, Nav } from 'react-bootstrap';
+import { Navbar, Container, Nav, Button, Form, FormControl } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-function Menu(){
+function Menu(props){
+
+    const [input,setInput] = useState('');
+
+    const handleChange = (e) =>{
+        setInput(e.target.value);
+    };
 
     return(
         <Navbar bg="dark" variant="dark">
@@ -13,6 +19,16 @@ function Menu(){
                     <Nav.Link >Pricing</Nav.Link>
                 </Nav>
             </Container>
+            <Form className="d-flex">
+                <FormControl
+                    type="search"
+                    placeholder="Search"
+                    className="me-2"
+                    aria-label="movie title"
+                    onChange={handleChange}
+                />
+                <Button variant="outline-success" onClick={props.setSearch(input)}>Search</Button>
+            </Form>
         </Navbar>
 
        )

@@ -1,5 +1,7 @@
 .basic-div{
     padding: 42px 30px;
+    background : whitesmoke;
+
 }
 
 .grid-group {
@@ -19,7 +21,7 @@
     transition:width 0.2s, height 0.2s, background-color 2s, transform 0.2s;
 }
 
-.background{
+.modal_background{
     position: fixed;
     top: 0;
     left: 0;
@@ -28,15 +30,18 @@
     background-color: rgba(0,0,0,0.50);
     z-index: 0;
 }
+.modal_header_btn{
+    float: right;
+}
 .modal__container{
     position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     max-height: 80%;
-    width: 20rem;
+    /*width: 50%;*/
     height: 80%;
-    padding: 16px;
+    /*padding: 16px;*/
     border-radius: 10px;
     text-align: center;
     z-index: 10;
@@ -55,4 +60,13 @@
 
 .zindex{
     z-index: 100!important;
+}
+
+.modal_body{
+    overflow: scroll;
+    overflow-y : hidden;
+}
+
+.modal_body::-webkit-scrollbar {
+    /*display: none;*/
 }

@@ -5,13 +5,16 @@ import Modal from "../components/Modal";
 import '../css/common/common.css';
 import {Card, Button, CardGroup} from 'react-bootstrap';
 
-function Home(){
+function Home(props){
     const [loading, setLoading] = useState(true);
     const [movies, setMovies] = useState([]);
     const [showModal, setShowModal] = useState(false);
-    const [movieId, setMovieId] = useState(0);
-    const openModal = id =>{
-        setMovieId(id);
+    const [modalMovie, setmodalMovie] = useState('https://yts.mx/api/v2/list_movies.json?');
+
+    const [url,setUrl] = useState()
+
+    const openModal = (movieId, coverImg , movieSummary) =>{
+        setmodalMovie([movieId,coverImg , movieSummary]);
         setShowModal(true);
 
     }
@@ -22,14 +25,14 @@ function Home(){
     //모달창 상세내용 나오게하기
     //모달창 컴포넌트화
     useEffect(() =>{
-        axios.get('https://yts.mx/api/v2/list_movies.json?minimum_rating=9')
+        axios.get('https://yts.mx/api/v2/list_movies.json?query_term= ')
             .then((Response)=>{
                 setMovies(Response.data.data.movies);
                 setLoading(false);
             }).catch((Error)=>{
             console.log(Error);
         });
-    },[]);
+    },[props.search]);
 
     return (
         <div className='basic-div'>
@@ -39,7 +42,7 @@ function Home(){
                     ):(
                             <div className= "grid-group"> {movies.map((movie,index) => (
                                 <div key = {index} onClick={ () => {
-                                    openModal(movie.id);
+                                    openModal(movie.id, movie.large_cover_image , movie.summary);
                                 }} >
                                     <Movie
                                         index = {index}
@@ -58,7 +61,7 @@ function Home(){
             {
                 showModal ?
                     (
-                        <Modal showModal = {showModal} setShowModal = {setShowModal} movieId = {movieId}> </Modal>
+                        <Modal showModal = {showModal} setShowModal = {setShowModal} movieId = {modalMovie[0]} large_cover_image = {modalMovie[1] } movieSummary = {modalMovie[2]}> </Modal>
 
                     ) : null
 

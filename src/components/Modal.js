@@ -22,7 +22,7 @@ function Modal(props){
 
 
     return(
-        <div className='background'>
+        <div className='modal_background'>
             {
                 useLoading  ?
                     (
@@ -34,11 +34,14 @@ function Modal(props){
                                 bg={'light'}
                                 key={'Light'}
                                 text={'black'}
-                                style={{ width: '18rem' }}
+                                style={{ width: '24rem' }}
                                 className="mb-2"
                             >
-                                <Card.Header>Header <button onClick={closeModal}>Click</button></Card.Header>
-                                <Card.Body>
+                                <Card.Header> <label className='modal_header_btn' onClick={closeModal}>✖</label></Card.Header>
+                                <Card.Body className = 'modal_body'>
+
+                                    <Card.Img variant="top" src={movieDetail.large_cover_image} />
+
                                     <Card.Title> {movieDetail.title}
                                     </Card.Title>
                                     <Card.Text>
@@ -53,11 +56,9 @@ function Modal(props){
                                             movieDetail.like_count
                                         }
 
-                                        장르 :
+                                        내용 :
                                         {
-                                            // movieDetail.genres.map((g,index) => (
-                                            //     <li key = {g}> {g}</li>
-                                            // ))
+                                            props.movieSummary
                                         }
                                     </Card.Text>
                                 </Card.Body>
