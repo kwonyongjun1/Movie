@@ -6,10 +6,9 @@ import '../css/common/common.css';
 import {Card, Button, CardGroup} from 'react-bootstrap';
 
 function Home(props){
-    const [loading, setLoading] = useState(true);
-    const [movies, setMovies] = useState([]);
+
     const [showModal, setShowModal] = useState(false);
-    const [modalMovie, setmodalMovie] = useState('https://yts.mx/api/v2/list_movies.json?');
+    const [modalMovie, setmodalMovie] = useState('');
 
     const [url,setUrl] = useState()
 
@@ -22,26 +21,15 @@ function Home(props){
         setShowModal(false);
     }
 
-    //모달창 상세내용 나오게하기
-    //모달창 컴포넌트화
-    useEffect(() =>{
-        axios.get('https://yts.mx/api/v2/list_movies.json?query_term= ')
-            .then((Response)=>{
-                setMovies(Response.data.data.movies);
-                setLoading(false);
-            }).catch((Error)=>{
-            console.log(Error);
-        });
-    },[props.search]);
-
     return (
         <div className='basic-div'>
             {
-                loading ?
+                props.loading ?
                     (<h1>Loading...</h1>
                     ):(
-                            <div className= "grid-group"> {movies.map((movie,index) => (
-                                <div key = {index} onClick={ () => {
+                            <div className= "grid-group"> {
+                                props.movies.map((movie,index) => (
+                                <div key = {movie.id} onClick={ () => {
                                     openModal(movie.id, movie.large_cover_image , movie.summary);
                                 }} >
                                     <Movie

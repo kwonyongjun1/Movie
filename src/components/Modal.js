@@ -15,7 +15,6 @@ function Modal(props){
             console.log(Error);
         });
     },[]);
-
     const closeModal = () =>{
         props.setShowModal(false);
     }
