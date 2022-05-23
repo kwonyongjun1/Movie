@@ -15,13 +15,15 @@ function App() {
     const [search, setSearch] = useState(  '' );
     const [loading, setLoading] = useState(true);
     const [movies, setMovies] = useState([]);
-    const [apiUrl, setApiUrl] = useState(' https://yts.mx/api/v2/list_movies.json?query_term=marvel');
+    const [apiUrl, setApiUrl] = useState(' https://yts.mx/api/v2/list_movies.json?');
     //배열로 저장하기
     //query_term : 영화제목 geners : 장르 minimum_rating : 평점
+    // query_term=marvel
 
     // enum?
     // 상태 패턴 추가
     // getUrl function
+
 
     // url 받아서 값 가져오기
     const getUrl = (mainUrl, param) =>{
@@ -36,6 +38,7 @@ function App() {
 
 
     const searchApi = () => {
+        //getUrl()
         axios.get(apiUrl)
             .then((Response)=>{
                 console.log(Response);
