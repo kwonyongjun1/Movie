@@ -12,10 +12,10 @@ import Menu from "./common/Menu";
 import {useEffect, useState} from "react";
 import axios from "axios";
 function App() {
-    const [search, setSearch] = useState(  '' );
+    const [search, setSearch] = useState(  '');
     const [loading, setLoading] = useState(true);
     const [movies, setMovies] = useState([]);
-    const [apiUrl, setApiUrl] = useState(' https://yts.mx/api/v2/list_movies.json?');
+   // const [apiUrl, setApiUrl] = useState(' https://yts.mx/api/v2/list_movies.json?');
     //배열로 저장하기
     //query_term : 영화제목 geners : 장르 minimum_rating : 평점
     // query_term=marvel
@@ -25,8 +25,13 @@ function App() {
     // getUrl function
 
 
+
+    useEffect(() =>{
+        searchApi('main');
+    },[]);
+
     // url 받아서 값 가져오기
-    const getUrl = (mainUrl, param) =>{
+    const getUrl = (mainUrl) =>{
         let apiUrl = '';
         if(mainUrl == 'main'){
             apiUrl = 'https://yts.mx/api/v2/list_movies.json?';
@@ -34,12 +39,21 @@ function App() {
             apiUrl = 'https://yts.mx/api/v2/movie_details.json?';
         }
 
-    }
+        if(search != null){
+            apiUrl += 'query_term='+search;
+        }
+
+        return apiUrl;
+
+    };
 
 
-    const searchApi = () => {
-        //getUrl()
-        axios.get(apiUrl)
+
+    const searchApi = (state) => {
+        let url = 'https://yts.mx/api/v2/list_movies.json?';
+           // getUrl(state);
+
+        axios.get(url)
             .then((Response)=>{
                 console.log(Response);
                 setMovies(Response.data.data.movies);
@@ -51,15 +65,13 @@ function App() {
 
 
 
-    useEffect(() =>{
-        searchApi();
-    },[]);
+
 
 
    return(
 
      <Router>
-         <Menu setSearch = {setSearch} search = {search} loading = {loading} movies={movies}/>
+         <Menu setSearch = {setSearch} search = {search} loading = {loading} movies={movies} searchApi = {searchApi}/>
          <Routes>
             <Route path = '/movie/:id' element={<Detail/>} />
             <Route path = '/' element={<Home search = {search} loading = {loading} movies={movies} />} />

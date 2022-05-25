@@ -14,7 +14,8 @@ function Menu(props){
       if (s == 'title'){
           props.setSearch(search);
       }
-      console.log(props.search);
+
+      props.searchApi('main');
     };
 
     const search = (key , value) => {
